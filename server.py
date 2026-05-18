@@ -111,7 +111,10 @@ def download(filename : str, request : Request):
 
     for path in search_paths:
         if os.path.exists(path):
-            return FileResponse(path, filename = filename)
+            from pathlib import Path
+            import mimetypes
+            media_type = mimetypes.guess_type(filename)[0] or "application/octet-stream"
+            return FileResponse(path, filename = filename, media_type=media_type)
     return JSONResponse({"status": "error", "message": "File not found"}, status_code=404)
 
 @app.post("/setup")
