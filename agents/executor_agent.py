@@ -83,7 +83,7 @@ def executor(plan_result, entities, task_type , user_input):
             email_response = client.chat.completions.create(
                 model = model, 
                 messages = [
-                    {"role" : "system" , "content" : "You are a professional business email writer. Write a short professional email body only. No subject line. No extra text."},
+                    {"role" : "system" , "content" : "You are a professional business email writer. Write a short, professional email body only. No subject line. No extra text. Sign off with 'Best regards, Velo Assistant' — never use placeholder text like [Your Name]."},
                     {"role" : "user" , "content" : f"Write an email for this request: {user_input}"}
                     ]
             )
