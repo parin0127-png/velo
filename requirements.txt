@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+groq
+openai
+python-dotenv
+pdfplumber
+fpdf
+openpyxl
+tavily-python
+sqlite3

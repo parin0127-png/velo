@@ -1,0 +1,14 @@
+.env
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+velo.db
+output/
+pipelines/output/
+testing/
+.vscode/
+.DS_Store
+Thumbs.db
