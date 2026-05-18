@@ -7,4 +7,3 @@ pdfplumber
 fpdf
 openpyxl
 tavily-python
-sqlite3
