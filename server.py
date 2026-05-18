@@ -3,6 +3,8 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+import glob
 import sqlite3
 import uuid
 import os
@@ -95,6 +97,22 @@ def index(request : Request):
     with open("ui/velo-chat.html" , "r" , encoding = "utf-8")as f:
         return HTMLResponse(f.read())
 
+@app.get("/download/{filename}")
+def download(filename : str, request : Request):
+    session_id = request.cookies.get(COOKIE_NAME)
+    if not session_id or not get_session(session_id):
+        return JSONResponse({"status" : "no_session"}, status_code = 401)
+
+    
+    search_paths = [
+        f"output/{filename}",
+        f"pipelines/output/{filename}"
+    ]
+
+    for path in search_paths:
+        if os.path.exists(path):
+            return FileResponse(path, filename = filename)
+    return JSONResponse({"status": "error", "message": "File not found"}, status_code=404)
 
 @app.post("/setup")
 def setup(payload : SetupPayload , response : Response):

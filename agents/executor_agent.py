@@ -105,12 +105,14 @@ def executor(plan_result, entities, task_type , user_input):
     
     elif task_type == "excel":
         path = generate_excel()
-        tool_result = f"Excel report generated at {path}"
+        filename = os.path.basename(path)
+        tool_result = f"Excel report ready. Download: /download/{filename}"
 
     elif task_type == "dashboard":
         from pipelines.output_stage import run as generate_output
         path = generate_output()
-        tool_result = f"Dashboard generated at {path}"
+        filename = os.path.basename(path)
+        tool_result = f"Dashboard ready. Download: /download/{filename}"
 
     user_message = f"Steps:\n{plan_result}\n\nEntities:\n{entities}\n\nTool result:\n{tool_result}"
     

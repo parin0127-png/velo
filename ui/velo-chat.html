@@ -555,7 +555,10 @@ function appendMessage(role, text) {
 
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
-  bubble.innerText = text;
+  bubble.innerHTML =  text.replace(/\n/g, '<br>').replace(
+    /(\/download\/[^\s<]+)/g,
+    '<a href="$1" target="_blank" style="color:#a78bfa;text-decoration:underline;">⬇ Download File</a>'
+);
 
   const time = document.createElement('div');
   time.className = 'msg-time';
